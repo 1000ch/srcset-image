@@ -15,7 +15,7 @@
     }
   });
 
-  SrcsetImagePrototype.createdCallback = function (argument) {
+  SrcsetImagePrototype.createdCallback = function () {
     this.original = this.src;
     this.src = FALLBACK_IMAGE;
   };
@@ -93,7 +93,7 @@
     }
 
     // return matched url with resolution
-    var best = FALLBACK_IMAGE;
+    var best = src;
     candidates.some(function (candidate) {
       if (resolution.w === candidate.w && resolution.x === candidate.x) {
         best = candidate.url;
@@ -102,16 +102,6 @@
         return false;
       }
     });
-    if (best === FALLBACK_IMAGE) {
-      candidates.some(function (candidate) {
-        if (resolution.x === candidate.x || resolution.w === candidate.w) {
-          best = candidate.url;
-          return true;
-        } else {
-          return false;
-        }
-      });
-    }
 
     // set detected url as src
     this.src = best;
