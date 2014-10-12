@@ -12,10 +12,10 @@ Load `srcset-image.js` in your HTML.
 <script src='srcset-image.js'></script>
 ```
 
-Modify your `<img>` elements such as following.
+Modify your `<img>` elements such as following ([srcset feature specification](http://dev.w3.org/html5/srcset/)).
 
 ```html
-<img is='srcset-image' src='path/to/your/image.jpg' width='100' height='100'>
+<img is='srcset-image' src='image.jpg' srcset='image-1.5x.jpg 1.5x, image-2x.jpg 2x'>
 ```
 
 ### Fallback
