@@ -22,8 +22,8 @@
 
   SrcsetImagePrototype.attachedCallback = function () {
 
-    var dpr = window.devicePixelRatio;
-    var width = window.innerWidth;
+    var devicePixelRatio = window.devicePixelRatio;
+    var innerWidth = window.innerWidth;
 
     var src = this.original;
     var srcset = this.srcset;
@@ -39,10 +39,9 @@
       x: 1
     };
 
-    var candidate;
     var re = /[^\,\s](.+?)\s([0-9]+)([wx])(\s([0-9]+)([wx]))?/g;
+    var candidate;
     var match;
-
     while ((match = re.exec(srcset)) !== null) {
 
       var url = match[1];
@@ -53,7 +52,7 @@
 
       // find optimal width and dpr
       if (unit1 === 'w' && number1) {
-        if (width < number1 && number1 <= resolution.w) {
+        if (innerWidth < number1 && number1 <= resolution.w) {
           resolution.w = number1;
 
           // define as candidate
@@ -63,7 +62,7 @@
           };
 
           if (unit2 === 'x' && number2) {
-            if (dpr <= number2 && (dpr > resolution.x && number2 < resolution.x)) {
+            if (devicePixelRatio <= number2 && (devicePixelRatio > resolution.x && number2 < resolution.x)) {
               resolution.x = number2;
               candidate.x = resolution.x;
             }
@@ -72,7 +71,7 @@
           candidates.push(candidate);
         }
       } else if (unit1 === 'x' && number1) {
-        if (dpr <= number1 && (dpr > resolution.x && number1 < resolution.x)) {
+        if (devicePixelRatio <= number1 && (devicePixelRatio > resolution.x && number1 < resolution.x)) {
           resolution.x = number1;
 
           // define as candidate
@@ -82,7 +81,7 @@
           };
 
           if (unit2 === 'w' && number2) {
-            if (width < number2 && number2 <= resolution.w) {
+            if (innerWidth < number2 && number2 <= resolution.w) {
               resolution.w = number2;
               candidate.w = resolution.w;
             }
@@ -95,24 +94,26 @@
 
     // return matched url with resolution
     var best = FALLBACK_IMAGE;
-    var c, i, l;
-    for (i = 0, l = candidates.length;i < l;i++) {
-      c = candidates[i];
-      if (resolution.w === c.w && resolution.x === c.x) {
-        best = c.url;
-        break;
+    candidates.some(function (candidate) {
+      if (resolution.w === candidate.w && resolution.x === candidate.x) {
+        best = candidate.url;
+        return true;
+      } else {
+        return false;
       }
+    });
+    if (best === FALLBACK_IMAGE) {
+      candidates.some(function (candidate) {
+        if (resolution.x === candidate.x || resolution.w === candidate.w) {
+          best = candidate.url;
+          return true;
+        } else {
+          return false;
+        }
+      });
     }
-    for (i = 0, l = candidates.length;i < l;i++) {
-      c = candidates[i];
-      if (resolution.x === c.x) {
-        best = c.url;
-        break;
-      } else if (resolution.w === c.w) {
-        best = c.url;
-        break;
-      }
-    }
+
+    // set detected url as src
     this.src = best;
   };
 
