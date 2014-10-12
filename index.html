@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>srcset-image</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src='srcset-image.js'></script>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <section class="jumbotron">
+        <h1>srcset-image</h1>
+        <p>Polyfill for srcset feature as Web Components.</p>
+        <p><a href="https://github.com/1000ch/srcset-image" class="btn btn-primary btn-lg" role="button">Fork me on GitHub</a></p>
+      </section>
+      <section>
+        <h2>Usage</h2>
+        <p>Load `srcset-image.js` in your HTML.</p>
+        <pre>&lt;script src='srcset-image.js'&gt;&lt;/script&gt;</pre>
+        <p>Modify your <code class="html">&lt;img&gt;</code> elements such as following.</p>
+        <pre>&lt;img is='srcset-image' src='path/to/your/image.jpg' width='100' height='100'&gt;</pre>
+        <h3>Fallback</h3>
+        <p>If browser does not support <code class="javascript">document.registerElement()</code>, Images will be loaded as usual.</p>
+      </section>
+      <section>
+        <h2>Demo</h2>
+        <div><img is='srcset-image' src='assets/img/1.jpg' srcset='assets/img/2.jpg 1.5x, assets/img/3.jpg 2x' style='max-width: 100%;'></div>
+      </section>
+    </div>
+  </body>
+</html>
