@@ -1,0 +1,24 @@
+{
+  "name": "srcset-image",
+  "main": "srcset-image.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/1000ch/srcset-image",
+  "authors": [
+    "1000ch <shogo.sensui@gmail.com>"
+  ],
+  "description": "Polyfill for srcset feature as Web Components.",
+  "keywords": [
+    "image",
+    "srcset",
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "assets",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
