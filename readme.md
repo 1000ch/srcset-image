@@ -1,4 +1,4 @@
-# `<srcset-image>`
+# [`<srcset-image>`](http://1000ch.github.io/srcset-image/)
 
 ## About
 
